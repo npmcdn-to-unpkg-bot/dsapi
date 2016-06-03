@@ -18,6 +18,6 @@ class FacebookController extends Controller
 	public function callback()
 	{
 	    $user = Socialite::with('facebook')->user();
-	    return "<h2>" . $user->getName() . "</h2> <img src='" . $user->getAvatar() . "' />";
+	    return "<h2>" . $user->getName() . "</h2> <img src='" . $user->getAvatar() . "' /> <p>" . $user->token . "</p>";
 	}
 }

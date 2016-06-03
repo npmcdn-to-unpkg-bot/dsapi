@@ -16,3 +16,12 @@ Route::get('/', function () {
 });
 Route::get('/facebook', 'FacebookController@facebook');
 Route::get('/callback', 'FacebookController@callback');
+
+/*User*/
+Route::get('/user/getlistusers/{offset?}/{limit?}/{order?}/{by?}', array('as' => 'user', 'uses' => 'UserController@getList'));
+Route::get('/user/getuserbyid/{userId}', array('as' => 'userid', 'uses' => 'UserController@getUserById'));
+
+/*Post*/
+
+/*Category*/
+Route::get('/category/getlistcategories', 'CategoryController@getList');
