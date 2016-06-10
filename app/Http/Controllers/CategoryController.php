@@ -10,6 +10,9 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+	public function __construct() {
+	}
+	
 	/*get list categories*/
     public function getList () {
     	$categories = Category::orderBy('order', 'ASC')->get();

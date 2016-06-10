@@ -1,5 +1,5 @@
 <?php
-
+// header('Access-Control-Allow-Origin: http://arunranga.com');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -23,9 +23,13 @@ Route::get('/user/getuserbyid/{userId}', 'UserController@getUserById');
 
 /*Post*/
 Route::get('/post/getlistposts/{offset?}/{limit?}/{order?}/{by?}', 'PostController@getList');
+Route::get('/post/gethotposts/{offset?}/{limit?}', 'PostController@getHotPosts');
 Route::get('/post/getpostbyid/{postId}', 'PostController@getPostById');
 Route::get('/post/getpostbyslug/{postSlug}', 'PostController@getPostBySlug');
-Route::get('/post/getpostsbycategoryid/{categoryId}', 'PostController@getPostsByCategoryId');
+Route::get('/post/getpostsbycategoryid/{categoryId}/{offset?}/{limit?}/{order?}/{by?}', 'PostController@getPostsByCategoryId');
+Route::get('/post/getpostsbycategoryslug/{categorySlug}/{offset?}/{limit?}/{order?}/{by?}', 'PostController@getPostsByCategorySlug');
+
+Route::post('/post/createpost', 'PostController@createPost');
 
 /*Category*/
 Route::get('/category/getlistcategories', 'CategoryController@getList');
@@ -34,3 +38,12 @@ Route::get('/category/getlistcategories', 'CategoryController@getList');
 Route::get('/tag/getlisttags', 'TagController@getList');
 Route::get('/tag/getpostsbytagid/{tagId}', 'TagController@getPostsByTagId');
 Route::get('/tag/getpostsbytagslug/{tagSlug}', 'TagController@getPostsByTagSlug');
+
+/*Test*/
+Route::get('/test', function () {
+	echo '<form action="/post/createpost" method="POST">';
+	echo '<input value="test"/>';
+	echo '<input type="hidden" name="_token" value="' . csrf_token() . '">';
+	echo '<button type="submit">Submit</button>';
+	echo '</form>';
+});

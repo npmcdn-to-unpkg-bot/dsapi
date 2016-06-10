@@ -10,6 +10,6 @@ class Category extends Model
 
 	/* relation */
 	public function posts() {
-		return $this->hasMany('App\Models\Post');
+		return $this->hasMany('App\Models\Post', 'id', 'category_id');
 	}
 }
