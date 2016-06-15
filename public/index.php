@@ -1,10 +1,4 @@
 <?php
-if (isset($_SERVER["HTTP_ORIGIN"]) && $_SERVER['HTTP_ORIGIN'] == 'http://dsng.com') {
-	echo 1; die;
-	header('Access-Control-Allow-Origin: http://dsng.com');
-	header('Access-Control-Allow-Headers:', 'Content-type');
-	header('Content-type: application/json');
-}
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

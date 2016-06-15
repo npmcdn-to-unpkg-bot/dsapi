@@ -147,14 +147,29 @@ class PostController extends Controller
      * @return json
      */
     public function createPost(Request $request) {
-        /*if ($type!='text' || $type!='image' || $type!='video' || $content=='') {
-            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>' invalid param'));
+        $postData = [];
+        $isAnonymous = $request->get('is_anonymous', 0);
+        $userId = $request->get('user_id', 0);
+        $type = $request->get('type', 'text');
+
+        $content = $request->get('content', '');
+        $categoryId = $request->get('category_id', 1);
+        $attachments = $request->get('attachments', []);
+        $thumb = $request->get('thumb', '');
+
+        if ($type!='text' && $type!='image' && $type!='video' || $content=='') {
+            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'invalid param', 'param'=>$type . ',' . $content));
+        }
+        if ($type!='text' && ($url=='' || $thumb=='')) {
+            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'invalid param'));
         }
 
-        if ($type!='text' && ($url=='' || $thumb=='')) {
-            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>' invalid param'));
-        }*/
-        return $request->all();
+        $postData['user_id'] = ($isAnonymous) ? 0 : $userId;
+        $postData['content'] = $content;
+
+        /*insert attachment*/
+
+        /*insert post*/
 
         return $response->json(array('error'=>0, 'data'=>array('insert_id'=>4), 'message'=>''));
     }
