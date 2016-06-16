@@ -8,12 +8,12 @@
 
             <div class="media-body">
                 <h4 class="media-heading">
-                    <a analytics-on="click" analytics-event="ViewDetailUser" ng-if="post.is_anonymous == 0" ui-sref="user.activity({userId: post.user_id })">{{post.display_name}}</a>
-                    <a analytics-on="click" analytics-event="ViewAnonymousUser" ng-if="post.is_anonymous == 1" href="javascript:;">{{post.display_name}}</a>
+                    <!-- <a analytics-on="click" analytics-event="ViewDetailUser" ng-if="post.is_anonymous == 0" ui-sref="user.activity({userId: post.user_id })">{{post.display_name}}</a> -->
+                    <a analytics-on="click" analytics-event="ViewAnonymousUser" ng-if="post.display_name" href="javascript:;">{{post.display_name}}</a>
                 </h4>
                 <div class="heading-sub">
                     <span>
-                        <a analytics-on="click" analytics-event="ViewDetailPost" ui-sref="post({post_id: post.post_id})" class="times"><span am-time-ago="'{{post.created}}'"></span> - {{post.category_name}}</a>
+                        <a analytics-on="click" analytics-event="ViewDetailPost" ui-sref="post({post_id: post.post_id})" class="times"><span am-time-ago="'{{post.created_at}}'"></span> - {{post.category_name}}</a>
                     </span>
                 </div>
             </div>
@@ -26,7 +26,9 @@
                 <div ng-bind-html="post.content | filterTxt">
 
                 </div>
-                <a analytics-on="click" analytics-event="ShowMorePost" href="" ng-if="post.showMore" ng-click="showMore()" class="more-post">Xem thêm</a>
+                <a analytics-on="click" analytics-event="ShowMorePost" href="" ng-if="post.showMore" ng-click="showMore()" class="more-post">Xem thêm</a><br>
+                <span ng-if="post.source">Nguồn: {{post.source}}</span>
+                <span ng-if="!post.source">Nguồn: Sưu tầm</span>
 
             </div>
         </div>
@@ -174,7 +176,7 @@
                                     <span ng-if="cm.liked > 0" class="dot"> · </span>
                                     <a href="javascript:;" ng-click="replyComment($index)">Trả lời</a>
                                     <span class="dot"> · </span>
-                                    <span am-time-ago="'{{cm.created}}'"></span>
+                                    <span am-time-ago="'{{cm.created_at}}'"></span>
                                 </div>
                                 <div class="ip-post" ng-show="cm.showReply">
                                     <div class="av-post">
@@ -209,7 +211,7 @@
                                         <span class="dot"> · </span>
                                         <a href="javascript:;">Trả lời</a>
                                         <span class="dot"> · </span>
-                                        <span am-time-ago="'{{rcm.created}}'"></span>
+                                        <span am-time-ago="'{{rcm.created_at}}'"></span>
                                     </div>
 
                                 </div>

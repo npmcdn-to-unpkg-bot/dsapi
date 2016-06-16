@@ -63,11 +63,9 @@ class ChannelController extends Controller
     	if ($source == '') {
     		return response()->json(array('error'=>0, 'data'=>'', 'message'=>'not source'));
     	}
-    	// $source = ($source == '') ? 'http://www.8bongda.com/link-sopcast/link-sopcast-euro-2016-phap-vs-albania-2h00-ngay-166.html' : $source;
     	$html = $this->file_get_html($source);
     	$contentArea = $html->find('div[id=content-area]', 0)->innertext;
     	$field = $this->str_get_html($contentArea);
-    	// var_dump($contentArea); die;
 
     	$result = [];
     	foreach ($field->find('a') as $element) {

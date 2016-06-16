@@ -328,7 +328,7 @@ angular.module('myApp.controllers', [])
         $scope.error = 0;
         $scope.error_msg = '';
         var params = {
-            category_id: $rootScope.create_category.category_id,
+            category_id: $rootScope.create_category.id,
             // attachments: $scope.images,
             content: $scope.formData.content,
             is_anonymous: $scope.is_anonymous,

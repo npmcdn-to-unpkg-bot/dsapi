@@ -99,7 +99,7 @@
             }, 500);
         };
         $scope.getPostByUser  = function (cateId) {
-            $http.get('/api/post/api_get_posts_by_ghim/0/6/0/'+cateId+'?device_id=pc')
+            $http.get('/api/post/getpostsbycategoryid/'+cateId+'/0/6')
                 .success(function(data, status, headers, config) {
                     var otherPosts = data.data;
                     for (var i = 0; i < otherPosts.length; i++) {
@@ -391,7 +391,7 @@
                 return
             }
             var modalInstance = $uibModal.open({
-                templateUrl: "views/post/listlike.html",
+                templateUrl: "templates/post/listlike.html",
                 controller: "ListLikeCtrl",
                 windowClass: "modal-border",
                 resolve: {
@@ -409,7 +409,7 @@
                 return
             }
             var modalInstance = $modal.open({
-                templateUrl: "/views/listshare.html?v=" + $rootScope.getAppVersion(),
+                templateUrl: "/templates/listshare.html?v=" + $rootScope.getAppVersion(),
                 controller: "ListShareCtrl",
                 resolve: {
                     postIdShare: function () {
@@ -426,7 +426,7 @@
                 return
             }
             var modalInstance = $modal.open({
-                templateUrl: "/views/sharebox.html?v=" + $rootScope.getAppVersion(),
+                templateUrl: "/templates/sharebox.html?v=" + $rootScope.getAppVersion(),
                 controller: "SharedPostCtrl",
                 resolve: {
                     sharedPost: function () {

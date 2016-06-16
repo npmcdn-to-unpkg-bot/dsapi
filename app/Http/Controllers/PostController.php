@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Attachment;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -21,11 +22,11 @@ class PostController extends Controller
     * $by       String (ASC|DESC)
     * return array object
     */
-    public function getList($offset = 0, $limit = 0, $order='id', $by='ASC') {
+    public function getList($offset = 0, $limit = 0, $order='id', $by='DESC') {
         $query = Post::orderBy($order, $by);
         if ($limit < $offset) {
             return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'Param invalid'));
-        } elseif ($limit > 0) {
+        } elseif ($limit > 0 && $limit > $offset) {
             $posts = $query->offset($offset)->limit($limit)->get();
         } else {
             $posts = $query->get();
@@ -34,8 +35,23 @@ class PostController extends Controller
             return response()->json(array('error'=>1002, 'data'=>'', 'message'=>'Cannot find any post'));
         }
         foreach ($posts as $p) {
-            $attachments = Attachment::where('post_id', $p->id)->get();
-            $p->attachments = $attachments;
+            /*attachment*/
+            if ($p->type != 'text') {
+                $attachments = Attachment::where('post_id', $p->id)->get();
+                $p->attachments = $attachments;
+            }
+            /*user*/
+            if ($p->user_id == 0) {
+                $p->display_name = "Anonymous";
+                $p->avatar = '/app/images/avatar.png';
+            } else {
+                $user = User::find($p->user_id);
+                $p->display_name = $user['display_name'];
+                $p->avatar = $user['avatar'];
+            }
+            /*category*/
+            $category = Category::find($p->category_id);
+            $p->category_name = $category['name'];
         }
         $count = $query->count();
         return response()->json(array('error'=>0,'count'=>$count, 'data'=>$posts, 'message'=>''));
@@ -52,7 +68,7 @@ class PostController extends Controller
         $query = Post::orderBy('viewed', 'DESC');
         if ($limit < $offset) {
             return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'Param invalid'));
-        } elseif ($limit > 0) {
+        } elseif ($limit > 0 && $limit > $offset) {
             $posts = $query->offset($offset)->limit($limit)->get();
         } else {
             $posts = $query->get();
@@ -61,8 +77,65 @@ class PostController extends Controller
             return response()->json(array('error'=>1002, 'data'=>'', 'message'=>'Cannot find any post'));
         }
         foreach ($posts as $p) {
-            $attachments = Attachment::where('post_id', $p->id)->get();
-            $p->attachments = $attachments;
+            /*attachments*/
+            if ($p->type != 'text') {
+                $attachments = Attachment::where('post_id', $p->id)->get();
+                $p->attachments = $attachments;
+            }
+            /*user*/
+            if ($p->user_id == 0) {
+                $p->display_name = "Anonymous";
+                $p->avatar = '/app/images/avatar.png';
+            } else {
+                $user = User::find($p->user_id);
+                $p->display_name = $user['display_name'];
+                $p->avatar = $user['avatar'];
+            }
+            /*category*/
+            $category = Category::find($p->category_id);
+            $p->category_name = $category['name'];
+        }
+        $count = $query->count();
+        return response()->json(array('error'=>0,'count'=>$count, 'data'=>$posts, 'message'=>''));
+    }
+    /** 
+    * get list usport post
+    * $offset   Integer
+    * $limit    Integer
+    * $order    String  (columnname)
+    * $by       String (ASC|DESC)
+    * return array object
+    */
+    public function getHotPostsbyCategoryId($categoryId, $offset = 0, $limit = 4) {
+        $query = Post::where('category_id', $categoryId)->orderBy('viewed', 'DESC');
+        if ($limit < $offset) {
+            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'Param invalid'));
+        } elseif ($limit > 0 && $limit > $offset) {
+            $posts = $query->offset($offset)->limit($limit)->get();
+        } else {
+            $posts = $query->get();
+        }
+        if (!$posts) {
+            return response()->json(array('error'=>1002, 'data'=>'', 'message'=>'Cannot find any post'));
+        }
+        foreach ($posts as $p) {
+            /*attachments*/
+            if ($p->type != 'text') {
+                $attachments = Attachment::where('post_id', $p->id)->get();
+                $p->attachments = $attachments;
+            }
+            /*user*/
+            if ($p->user_id == 0) {
+                $p->display_name = "Anonymous";
+                $p->avatar = '/app/images/avatar.png';
+            } else {
+                $user = User::find($p->user_id);
+                $p->display_name = $user['display_name'];
+                $p->avatar = $user['avatar'];
+            }
+            /*category*/
+            $category = Category::find($p->category_id);
+            $p->category_name = $category['name'];
         }
         $count = $query->count();
         return response()->json(array('error'=>0,'count'=>$count, 'data'=>$posts, 'message'=>''));
@@ -77,7 +150,23 @@ class PostController extends Controller
     	$post = Post::find($postId);//->tags;
     	$post->category = Post::find($postId)->category;
     	$post->tags = Post::find($postId)->tags;
-    	$post->attachments = Attachment::where('post_id', $postId)->select(array('src'))->get();
+    	// $post->attachments = Attachment::where('post_id', $postId)->select(array('src'))->get();
+        if ($post->type != 'text') {
+            $attachments = Attachment::where('post_id', $postId)->get();
+            $post->attachments = $attachments;
+        }
+        /*user*/
+        if ($post->user_id == 0) {
+            $post->display_name = "Anonymous";
+            $post->avatar = '/app/images/avatar.png';
+        } else {
+            $user = User::find($post->user_id);
+            $post->display_name = $user['display_name'];
+            $post->avatar = $user['avatar'];
+        }
+        /*category*/
+        $category = Category::find($post->category_id);
+        $post->category_name = $category['name']; 
 
     	if (!$post) {
     		return response()->json(array('error'=>1002, 'data'=>'', 'message'=>'Cannot find post'));
@@ -95,6 +184,24 @@ class PostController extends Controller
     	if (!$post) {
     		return response()->json(array('error'=>1002, 'data'=>'', 'message'=>'Cannot find post'));
     	}
+        /*attachment*/
+        if ($post->type != 'text') {
+            $attachments = Attachment::where('post_id', $postId)->get();
+            $post->attachments = $attachments;
+        }
+        /*user*/
+        if ($post->user_id == 0) {
+            $post->display_name = "Anonymous";
+            $post->avatar = '/app/images/avatar.png';
+        } else {
+            $user = User::find($post->user_id);
+            $post->display_name = $user['display_name'];
+            $post->avatar = $user['avatar'];
+        }
+        /*category*/
+        $category = Category::find($post->category_id);
+        $post->category_name = $category['name']; 
+
     	return response()->json(array('error'=>0, 'data'=>$post, 'message'=>''));
     }
 
@@ -119,6 +226,24 @@ class PostController extends Controller
         if (!$posts) {
             return response()->json(array('error'=>1002, 'data'=>'', 'message'=>'Cannot find any post'));
         } 
+        foreach ($posts as $p) {
+            /*attachments*/
+            if ($p->type != 'text') {
+                $attachments = Attachment::where('post_id', $p->id)->get();
+                $p->attachments = $attachments;
+            }
+            /*user*/
+            if ($p->user_id == 0) {
+                $p->display_name = "Anonymous";
+                $p->avatar = '/app/images/avatar.png';
+            } else {
+                $user = User::find($p->user_id);
+                $p->display_name = $user['display_name'];
+            }
+            /*category*/
+            $category = Category::find($p->category_id);
+            $p->category_name = $category['name'];
+        }
         $count = $query->count();
         return response()->json(array('error'=>0,'count'=>$count, 'data'=>$posts, 'message'=>''));
     }
@@ -147,9 +272,9 @@ class PostController extends Controller
      * @return json
      */
     public function createPost(Request $request) {
-        $postData = [];
+        $post = new Post;
         $isAnonymous = $request->get('is_anonymous', 0);
-        $userId = $request->get('user_id', 0);
+        $userId = $request->get('user_id', $isAnonymous);
         $type = $request->get('type', 'text');
 
         $content = $request->get('content', '');
@@ -157,21 +282,42 @@ class PostController extends Controller
         $attachments = $request->get('attachments', []);
         $thumb = $request->get('thumb', '');
 
-        if ($type!='text' && $type!='image' && $type!='video' || $content=='') {
+        if ($type == 'text') {
+            if ($content == '') {
+                return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'content cannot empty'));
+            }
+            $post->user_id = $userId;
+            $post->content = $content;
+            $post->category_id = $categoryId;
+            // $post->created = date('Y-m-d h:i:s');
+            // $post->updated = $post->created;
+            if ($post->save()) {
+                return $response->json(array('error'=>0, 'data'=>array('insert_id'=>$post->id), 'message'=>''));
+            } else {
+                return $response->json(array('error'=>1, 'data'=>'', 'message'=>'error insert post'));
+            }
+
+        } /*elseif ($type == 'image') {
+            # code...
+        } elseif ($type == 'video') {
+            # code...
+        }*/ else {
+            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'invalid param', 'param'=>$type));
+        }
+
+        /*if ($type!='text' && $type!='image' && $type!='video' || $content=='') {
             return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'invalid param', 'param'=>$type . ',' . $content));
         }
         if ($type!='text' && ($url=='' || $thumb=='')) {
-            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'invalid param'));
-        }
+            return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'invalid param', 'param'=>$type . '|' . $url . '|' . $thumb));
+        }*/
 
-        $postData['user_id'] = ($isAnonymous) ? 0 : $userId;
-        $postData['content'] = $content;
-
+        
         /*insert attachment*/
 
         /*insert post*/
 
-        return $response->json(array('error'=>0, 'data'=>array('insert_id'=>4), 'message'=>''));
+        // return $response->json(array('error'=>0, 'data'=>array('insert_id'=>4), 'message'=>''));
     }
 
     /**

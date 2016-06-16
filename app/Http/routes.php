@@ -59,7 +59,8 @@ Route::group(array('prefix'=>'/api/'), function() {
 
 	/*Post*/
 	Route::get('/post/getlistposts/{offset?}/{limit?}/{order?}/{by?}', 'PostController@getList');
-	Route::get('/post/gethotposts/{offset?}/{limit?}', 'PostController@getHotPosts');
+    Route::get('/post/gethotposts/{offset?}/{limit?}', 'PostController@getHotPosts');
+    Route::get('/post/gethotpostsbycategoryid/{categoryId}/{offset?}/{limit?}', 'PostController@getHotPosts');
 	Route::get('/post/getpostbyid/{postId}', 'PostController@getPostById');
 	Route::get('/post/getpostbyslug/{postSlug}', 'PostController@getPostBySlug');
 	Route::get('/post/getpostsbycategoryid/{categoryId}/{offset?}/{limit?}/{order?}/{by?}', 'PostController@getPostsByCategoryId');

@@ -9,9 +9,8 @@
                         <img ng-if="user.avatar" ng-src="{{user.avatar}}">
                     </div>
                     <div class="info-user">
-                        <h1>{{user.display_name}} <span class="beat-coin"><span>{{user.bcoin | shortNumber}} <img src="images/beat-coin-white.png"></span></span></h1>
-                        <div class="status">I'm feeling, it's the beat. Everybody put your hands up for the beat of
-                            life.
+                        <h1>{{user.display_name}} <!-- <span class="beat-coin"><span>{{user.bcoin | shortNumber}} <img src="images/beat-coin-white.png"></span></span> --></h1>
+                        <div class="status">I'm using usport.
                         </div>
                         <div class="extra">
                             <div class="item-extra">
@@ -52,7 +51,7 @@
                 <div masonry item-selector=".feed-item" fitWidth="true" isFitWidth="true">
                     <!--feed item-->
                     <div ng-repeat='(pidx, item) in posts' class="feed-item masonry-brick" ng-controller="PostCtrl" ng-init="init(item, pidx)" track-position>
-                        <div ng-include="'/views/post/article.html'">
+                        <div ng-include="'/templates/post/article.html'">
 
                         </div>
                     </div>

@@ -25,9 +25,9 @@ angular.module('myApp.filters', [])
     };
 }).filter('multiImage', function($timeout, $rootScope) {
     return function( index) {
-        var img =  '/images/thumb-1x1.png';
+        var img =  '/app/images/thumb-1x1.png';
         if(index <= 1) {
-            img =  '/images/thumb-3x2.png';
+            img =  '/app/images/thumb-3x2.png';
         }
         $timeout(function () {
             $rootScope.$broadcast('masonry.reload');
@@ -36,9 +36,9 @@ angular.module('myApp.filters', [])
     };
 }).filter('multiImage2', function($timeout, $rootScope) {
     return function( index) {
-        var img =  'images/thumb-1x1.png';
+        var img =  '/app/images/thumb-1x1.png';
         if(index < 1) {
-            img =  'images/thumb-3x2.png';
+            img =  '/app/images/thumb-3x2.png';
         }
         $timeout(function () {
             $rootScope.$broadcast('masonry.reload');

@@ -48,7 +48,7 @@
         }
 
         function getPost(postId) {
-            var url = "/api/post/api_get_post_by_id/"+postId+"?device_id=pc";
+            var url = "/api/post/getpostbyid/"+postId;
             return $http.get(url)
         }
         function getPostByUser(userId, cateId) {
