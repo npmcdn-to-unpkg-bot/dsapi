@@ -40,9 +40,9 @@
 </div>
 <!-- Footer-->
 <div ui-view></div>
-<div class="new-post">
+<!-- <div class="new-post">
     <div class="new-inner"><a ng-click="selectCate()" href="javascript:;" class="icon ion-edit"></a></div>
-</div>
+</div> -->
 
 <script src="/app/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/app/bower_components/jquery-bridget/jquery-bridget.js"></script>

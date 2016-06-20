@@ -120,7 +120,7 @@
                     </div>
                 </div>
                 <div class="feed" ng-show="preLoading">
-                    <div class="feed-item">
+                    <!-- <div class="feed-item">
                         <div class="media">
                             <div class="thumbnail">
                                 <div class="media-header">
@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="feed-inner" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='3'>
                         <div ng-repeat='(pidx, item) in posts' class="feed-item " ng-controller="PostCtrl" ng-init="init(item, pidx)" track-position>
                             <div ng-include="'/templates/post/article.html'">

@@ -26,18 +26,6 @@ angular.module('myApp', [
 	])
 .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $routeProvider) {
 
-    /*$routeProvider
-            .when('/', {
-                templateUrl: 'templates/home/home.html',
-                controller: 'CategoryController'
-            })
-            .when('/ngtest', {
-                templateUrl: 'templates/home/home.html',
-                controller: 'CategoryController'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });*/
     $urlRouterProvider.otherwise("error");
     $stateProvider.state("home", {
         url: "/", templateUrl: "/templates/home/home.html",
@@ -99,7 +87,7 @@ angular.module('myApp', [
         url: "/error", 
         templateUrl: "/templates/error.html"
     });
-    // $locationProvider.html5Mode({enabled: true, requireBase: false}).hashPrefix("!")
+    $locationProvider.html5Mode({enabled: true, requireBase: false}).hashPrefix("!")
 
 })
 .run(function(amMoment, $rootScope, $location, $anchorScroll, $state) {

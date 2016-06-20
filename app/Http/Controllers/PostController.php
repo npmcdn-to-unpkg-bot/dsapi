@@ -46,7 +46,7 @@ class PostController extends Controller
                 $p->avatar = '/app/images/avatar.png';
             } else {
                 $user = User::find($p->user_id);
-                $p->display_name = $user['display_name'];
+                $p->display_name = $user['name'];
                 $p->avatar = $user['avatar'];
             }
             /*category*/
@@ -88,7 +88,7 @@ class PostController extends Controller
                 $p->avatar = '/app/images/avatar.png';
             } else {
                 $user = User::find($p->user_id);
-                $p->display_name = $user['display_name'];
+                $p->display_name = $user['name'];
                 $p->avatar = $user['avatar'];
             }
             /*category*/
@@ -130,7 +130,7 @@ class PostController extends Controller
                 $p->avatar = '/app/images/avatar.png';
             } else {
                 $user = User::find($p->user_id);
-                $p->display_name = $user['display_name'];
+                $p->display_name = $user['name'];
                 $p->avatar = $user['avatar'];
             }
             /*category*/
@@ -161,7 +161,7 @@ class PostController extends Controller
             $post->avatar = '/app/images/avatar.png';
         } else {
             $user = User::find($post->user_id);
-            $post->display_name = $user['display_name'];
+            $post->display_name = $user['name'];
             $post->avatar = $user['avatar'];
         }
         /*category*/
@@ -195,7 +195,7 @@ class PostController extends Controller
             $post->avatar = '/app/images/avatar.png';
         } else {
             $user = User::find($post->user_id);
-            $post->display_name = $user['display_name'];
+            $post->display_name = $user['name'];
             $post->avatar = $user['avatar'];
         }
         /*category*/
@@ -238,7 +238,7 @@ class PostController extends Controller
                 $p->avatar = '/app/images/avatar.png';
             } else {
                 $user = User::find($p->user_id);
-                $p->display_name = $user['display_name'];
+                $p->display_name = $user['name'];
             }
             /*category*/
             $category = Category::find($p->category_id);

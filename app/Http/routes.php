@@ -89,16 +89,65 @@ Route::get('/category/{categorySlug}', function () {
 	return View::make('templates.home.home');
 });*/
 
-Route::get('/facebook', 'FacebookController@facebook');
-Route::get('/callback', 'FacebookController@callback');
+
+// login
+Route::get('/admin/login', array(
+    'as' => 'admin.login',
+    function () {
+        if (Auth::check()) {
+            return Redirect::route('admin.dashboard');
+        }
+        return View::make('backend/auth/login');
+    }, ));
+
+Route::get('/facebook', array('as'=>'facebook.login', 'uses'=>'FacebookController@facebookLogin'));
+Route::get('/callback', array('as'=>'facebook.callback', 'uses'=>'FacebookController@facebookLoginCallback'));
+
+Route::group(array('prefix' => '/admin',
+                       'namespace' => 'Admin',
+                       'middleware' => ['auth'] ), function () {
+
+
+    // admin auth
+    // Route::get('admin/login', array('as' => 'admin.login', 'uses' => 'AuthController@getLogin'));
+    Route::get('/logout', array('as' => 'admin.logout', 'uses' => 'AuthController@getLogout'));
+    Route::post('/login', array('as' => 'admin.login.post', 'uses' => 'AuthController@postLogin'));
+
+    // admin password reminder
+    Route::get('/forgot-password', array('as' => 'admin.forgot.password',
+                                              'uses' => 'AuthController@getForgotPassword', ));
+    Route::post('/forgot-password', array('as' => 'admin.forgot.password.post',
+                                               'uses' => 'AuthController@postForgotPassword', ));
+
+    Route::get('{id}/reset/{code}', array('as' => 'admin.reset.password',
+                                                'uses' => 'AuthController@getResetPassword', ))->where('id', '[0-9]+');
+    Route::post('/reset-password', array('as' => 'admin.reset.password.post',
+                                              'uses' => 'AuthController@postResetPassword', ));
+
+    // admin dashboard
+    Route::get('/', array('as' => 'admin.dashboard', 'uses' => 'DashboardController@index'));
+
+    /*// user
+    Route::resource('user', 'UserController');
+    Route::get('/user/{id}/delete', array('as' => 'admin.user.delete',
+                                         'uses' => 'UserController@confirmDestroy', ))->where('id', '[0-9]+');
+
+    // role
+    Route::resource('/role', 'RoleController');
+    Route::get('/role/{id}/delete', array('as' => 'admin.role.delete',
+                                          'uses' => 'RoleController@confirmDestroy', ))->where('id', '[0-9]+');*/
+});
 
 
 /*Test*/
 Route::get('/test', function () {
     $url = urlencode('http://www.8bongda.com/link-sopcast/link-sopcast-euro-2016-phap-vs-albania-2h00-ngay-166.html');
-	echo '<form action="/api/channel/getmatchlink/url/' . $url . '">';
-	// echo '<input name="source" value=""/>';
-	// echo '<input type="hidden" name="_token" value="' . csrf_token() . '">';
-	echo '<button type="submit">Submit</button>';
-	echo '</form>';
+    echo '<form action="/api/channel/getmatchlink/url/' . $url . '">';
+    // echo '<input name="source" value=""/>';
+    // echo '<input type="hidden" name="_token" value="' . csrf_token() . '">';
+    echo '<button type="submit">Submit</button>';
+    echo '</form>';
 });
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

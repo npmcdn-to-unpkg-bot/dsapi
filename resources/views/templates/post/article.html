@@ -26,9 +26,9 @@
                 <div ng-bind-html="post.content | filterTxt">
 
                 </div>
-                <a analytics-on="click" analytics-event="ShowMorePost" href="" ng-if="post.showMore" ng-click="showMore()" class="more-post">Xem thêm</a><br>
                 <span ng-if="post.source">Nguồn: {{post.source}}</span>
-                <span ng-if="!post.source">Nguồn: Sưu tầm</span>
+                <span ng-if="!post.source">Nguồn: Sưu tầm</span><br>
+                <a analytics-on="click" analytics-event="ShowMorePost" href="" ng-if="post.showMore" ng-click="showMore()" class="more-post">Xem thêm</a>
 
             </div>
         </div>
@@ -47,7 +47,7 @@
                             <img ng-src="{{$index | multiImage2}}" style="background: url({{attachment.src}}) no-repeat">
                         </a>
                         <a analytics-on="click" analytics-event="ViewPhoto" ng-href="{{attachment.src}}" data-toggle="lightbox" data-gallery="multiimages-{{post.post_id}}" ng-if="post.attachments.length > 1 && post.attachments.length <= 3">
-                            <img ng-src="/images/thumb-1x1.png" style="background: url({{attachment.src}}) no-repeat">
+                            <img ng-src="/app/images/thumb-1x1.png" style="background: url({{attachment.src}}) no-repeat">
                         </a>
                         <a analytics-on="click" analytics-event="ViewPhoto" ng-if="post.attachments.length > 5 && $index == 4" ng-href="{{attachment.src}}" data-toggle="lightbox" data-gallery="multiimages-{{post.post_id}}">
                             <span class="nums-photo"><b>+{{post.attachments.length - 4}}</b></span>

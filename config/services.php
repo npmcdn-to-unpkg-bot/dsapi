@@ -37,7 +37,7 @@ return [
     'facebook' => [
         'client_id' => '1184650714881453',
         'client_secret' => '1531895a5d631071f32c01e1cd7b7c51',
-        'redirect' => 'http://api.dsng.com/callback',
+        'redirect' => 'http://dsng.com/callback',
     ],
 
 ];
