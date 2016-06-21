@@ -23,7 +23,12 @@ class FacebookController extends Controller
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
 
         auth()->login($user);
+        /*$u = Auth::user();
+        echo $u['email'];
+        echo '<pre>';
+        var_dump($u);
+        die;*/
         
-        return redirect()->to('/admin');
+        return Redirect::route('admin.dashboard');
     }
 }

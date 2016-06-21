@@ -127,7 +127,12 @@ Route::group(array('prefix' => '/admin',
     // admin dashboard
     Route::get('/', array('as' => 'admin.dashboard', 'uses' => 'DashboardController@index'));
 
-    /*// user
+    // category
+    Route::resource('category', 'CategoryController', array('before' => 'hasAccess:category'));
+    Route::get('category/{id}/delete', array('as' => 'admin.category.delete',
+                                                 'uses' => 'CategoryController@confirmDestroy', ))->where('id', '[0-9]+');
+
+    // user
     Route::resource('user', 'UserController');
     Route::get('/user/{id}/delete', array('as' => 'admin.user.delete',
                                          'uses' => 'UserController@confirmDestroy', ))->where('id', '[0-9]+');
@@ -135,7 +140,7 @@ Route::group(array('prefix' => '/admin',
     // role
     Route::resource('/role', 'RoleController');
     Route::get('/role/{id}/delete', array('as' => 'admin.role.delete',
-                                          'uses' => 'RoleController@confirmDestroy', ))->where('id', '[0-9]+');*/
+                                          'uses' => 'RoleController@confirmDestroy', ))->where('id', '[0-9]+');
 });
 
 
