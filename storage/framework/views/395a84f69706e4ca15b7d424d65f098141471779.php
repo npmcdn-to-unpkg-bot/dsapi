@@ -9,7 +9,7 @@
 
             </div>
             <div class="pull-left info">
-                <p><?php echo e(Auth::user()->name || Auth::user()->email); ?></p>
+                <p><?php echo e((Auth::user()->name == 'NULL')?Auth::user()->email:Auth::user()->name); ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -37,13 +37,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="treeview <?php echo e(setActive('admin/post*')); ?>"><a href="#"> <i class="fa fa-book"></i> <span>Articles</span>
+            <li class="treeview <?php echo e(setActive('admin/post*')); ?>"><a href="#"> <i class="fa fa-book"></i> <span>Posts</span>
                     <i class="fa fa-angle-left pull-right"></i> </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo e(url('/admin/post')); ?>"><i class="fa fa-archive"></i> All Articles</a>
+                    <li><a href="<?php echo e(url('/admin/post')); ?>"><i class="fa fa-archive"></i> All Posts</a>
                     </li>
                     <li>
-                        <a href="<?php echo e(url('/admin/post/create')); ?>"><i class="fa fa-plus-square"></i> Add Article</a>
+                        <a href="<?php echo e(url('/admin/post/create')); ?>"><i class="fa fa-plus-square"></i> Add Post</a>
                     </li>
                 </ul>
             </li>

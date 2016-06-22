@@ -132,6 +132,11 @@ Route::group(array('prefix' => '/admin',
     Route::get('category/{id}/delete', array('as' => 'admin.category.delete',
                                                  'uses' => 'CategoryController@confirmDestroy', ))->where('id', '[0-9]+');
 
+    // post
+    Route::resource('post', 'PostController', array('before' => 'hasAccess:post'));
+    Route::get('post/{id}/delete', array('as' => 'admin.post.delete',
+                                                 'uses' => 'PostController@confirmDestroy', ))->where('id', '[0-9]+');
+
     // user
     Route::resource('user', 'UserController');
     Route::get('/user/{id}/delete', array('as' => 'admin.user.delete',

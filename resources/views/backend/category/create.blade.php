@@ -15,22 +15,22 @@
 <br>
 <div class="container">
 
-    {!! Form::open(array('action' => '\Fully\Http\Controllers\Admin\CategoryController@store' )) !!}
+    {!! Form::open(array('action' => '\App\Http\Controllers\Admin\CategoryController@store' )) !!}
     <!-- Title -->
-    <div class="control-group {!! $errors->has('title') ? 'has-error' : '' !!}">
-        <label class="control-label" for="title">Category</label>
+    <div class="control-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+        <label class="control-label" for="name">Category</label>
 
         <div class="controls">
-            {!! Form::text('title', null, array('class'=>'form-control', 'id' => 'title', 'placeholder'=>'Category', 'value'=>Input::old('title'))) !!}
-            @if ($errors->first('title'))
-            <span class="help-block">{!! $errors->first('title') !!}</span>
+            {!! Form::text('name', null, array('class'=>'form-control', 'id' => 'name', 'placeholder'=>'Category', 'value'=>Input::old('name'))) !!}
+            @if ($errors->first('name'))
+            <span class="help-block">{!! $errors->first('name') !!}</span>
             @endif
         </div>
     </div>
     <br>
     <!-- Form actions -->
     {!! Form::submit('Save Changes', array('class' => 'btn btn-success')) !!}
-    <a href="{!! langUrl('admin/category') !!}" class="btn btn-default">&nbsp;Cancel</a>
+    <a href="{!! langUrl('/admin/category') !!}" class="btn btn-default">&nbsp;Cancel</a>
     {!! Form::close() !!}
 </div>
 @stop

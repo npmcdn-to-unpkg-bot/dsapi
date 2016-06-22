@@ -5,7 +5,7 @@ namespace App\Repositories;
 /**
  * Class RepositoryInterface.
  *
- * @author Sefa Karagöz <karagozsefa@gmail.com>
+ * @author 
  */
 interface RepositoryInterface
 {

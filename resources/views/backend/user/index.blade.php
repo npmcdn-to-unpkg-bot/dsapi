@@ -45,7 +45,7 @@
                 <tbody>
                 @foreach( $users as $user )
                 <tr>
-                    <td> {!! link_to_route(getLang(). '.admin.user.show', $user->first_name . " " . $user->last_name, $user->id, array( 'class' => 'btn btn-link btn-xs' )) !!}
+                    <td> {!! link_to_route(getLang(). 'admin.user.show', $user->first_name . " " . $user->last_name, $user->id, array( 'class' => 'btn btn-link btn-xs' )) !!}
                     <td>{!! $user->email !!}</td>
                     <td>{!! $user->created_at !!}</td>
                     <td>{!! $user->last_login !!}</td>

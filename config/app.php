@@ -157,6 +157,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
         
         /*
          * 3rd party
@@ -164,6 +165,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
     ],
 
     /*
@@ -217,6 +219,7 @@ return [
         'Form'                  => Collective\Html\FormFacade::class,
         'HTML'                  => Collective\Html\HtmlFacade::class,
         'Flash'                 => Laracasts\Flash\Flash::class,
+        'Input'                 => Illuminate\Support\Facades\Input::class,
 
     ],
 

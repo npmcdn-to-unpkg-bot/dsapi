@@ -14,7 +14,7 @@
 <br>
 <div class="container">
 
-    {!! Form::open( array( 'route' => array(getLang(). '.admin.user.update', $user->id), 'method' => 'PATCH')) !!}
+    {!! Form::open( array( 'route' => array(getLang(). 'admin.user.update', $user->id), 'method' => 'PATCH')) !!}
     <!-- First Name -->
     <div class="control-group {!! $errors->has('first-name') ? 'has-error' : '' !!}">
         <label class="control-label" for="first-name">First Name</label>

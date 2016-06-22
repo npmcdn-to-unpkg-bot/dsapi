@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use View;
 use Input;
 use App\Services\Pagination;
+use App\Http\Controllers\Controller;
 use App\Repositories\Category\CategoryInterface;
 use App\Exceptions\Validation\ValidationException;
 use App\Repositories\Category\CategoryRepository as Category;
@@ -32,6 +30,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        flash()->message('Welcome Aboard!');
         $pagiData = $this->category->paginate(Input::get('page', 1), $this->perPage, true);
         $categories = Pagination::makeLengthAware($pagiData->items, $pagiData->totalItems, $this->perPage);
 
@@ -57,7 +56,7 @@ class CategoryController extends Controller
     {
         try {
             $this->category->create(Input::all());
-            Flash::message('Category was successfully added');
+            flash()->message('Category was successfully added');
 
             return langRedirectRoute('admin.category.index');
         } catch (ValidationException $e) {
@@ -104,7 +103,7 @@ class CategoryController extends Controller
     {
         try {
             $this->category->update($id, Input::all());
-            Flash::message('Category was successfully updated');
+            flash()->message('Category was successfully updated');
 
             return langRedirectRoute('admin.category.index');
         } catch (ValidationException $e) {
@@ -122,7 +121,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->category->delete($id);
-        Flash::message('Category was successfully deleted');
+        flash()->message('Category was successfully deleted');
 
         return langRedirectRoute('admin.category.index');
     }

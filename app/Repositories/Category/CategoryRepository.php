@@ -28,7 +28,7 @@ class CategoryRepository extends RepositoryAbstract implements CategoryInterface
      * @var array
      */
     protected static $rules = [
-        'title' => 'required|min:3|unique:categories',
+        'name' => 'required|min:3|unique:categories',
     ];
 
     /**
@@ -63,7 +63,7 @@ class CategoryRepository extends RepositoryAbstract implements CategoryInterface
         $result->totalItems = 0;
         $result->items = array();
 
-        $query = $this->category->orderBy('title');
+        $query = $this->category->orderBy('name');
 
         $categories = $query->skip($limit * ($page - 1))->take($limit)->get();
 
@@ -78,7 +78,7 @@ class CategoryRepository extends RepositoryAbstract implements CategoryInterface
      */
     public function lists()
     {
-        return $this->category->lists('title', 'id');
+        return $this->category->lists('name', 'id');
     }
 
     /**
@@ -98,7 +98,7 @@ class CategoryRepository extends RepositoryAbstract implements CategoryInterface
      */
     public function getArticlesBySlug($slug)
     {
-        return $this->category->where('slug', $slug)->first()->articles()->orderBy('created_at', 'desc')->paginate($this->perPage);
+        return $this->category->where('slug', $slug)->first()->posts()->orderBy('created_at', 'desc')->paginate($this->perPage);
     }
 
     /**
@@ -115,7 +115,6 @@ class CategoryRepository extends RepositoryAbstract implements CategoryInterface
 
             return true;
         }
-
         throw new ValidationException('Category validation failed', $this->getErrors());
     }
 
@@ -149,7 +148,7 @@ class CategoryRepository extends RepositoryAbstract implements CategoryInterface
     public function delete($id)
     {
         $this->category = $this->category->find($id);
-        $this->category->articles()->delete($id);
+        $this->category->posts()->delete($id);
         $this->category->delete();
     }
 

@@ -75,14 +75,14 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ gravatarUrl(Auth::user()->email) }}" class="user-image" alt="User Image"/>
-                            <span class="hidden-xs">{{ Auth::user()->name || Auth::user()->email }}</span> </a>
+                            <span class="hidden-xs">{{ (Auth::user()->name == 'NULL')?Auth::user()->email:Auth::user()->name }}</span> </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="{{ gravatarUrl(Auth::user()->email) }}" class="img-circle" alt="User Image"/>
 
                                 <p>
-                                <p> {{ Auth::user()->name || Auth::user()->email }} - Web Developer
+                                <p> {{ (Auth::user()->name == 'NULL')?Auth::user()->email:Auth::user()->name }}
                                     <!-- <small>Member since Nov. 2012</small> -->
                                 </p>
                             </li>

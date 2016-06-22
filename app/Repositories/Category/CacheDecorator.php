@@ -12,7 +12,7 @@ use App\Services\Cache\CacheInterface;
 class CacheDecorator extends AbstractCategoryDecorator
 {
     /**
-     * @var \Fully\Services\Cache\CacheInterface
+     * @var \App\Services\Cache\CacheInterface
      */
     protected $cache;
 

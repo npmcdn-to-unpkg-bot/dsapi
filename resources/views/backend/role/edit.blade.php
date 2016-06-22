@@ -13,7 +13,7 @@
 <br>
 <br>
 <div class="container">
-    {!! Form::open( array( 'route' => array(getLang(). '.admin.role.update', $role->id), 'method' => 'PATCH')) !!}
+    {!! Form::open( array( 'route' => array(getLang(). 'admin.role.update', $role->id), 'method' => 'PATCH')) !!}
     <!-- Role Name -->
     <div class="control-group {!! $errors->has('name') ? 'has-error' : '' !!}">
         <label class="control-label" for="name">Name</label>

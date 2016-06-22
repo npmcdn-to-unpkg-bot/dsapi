@@ -5,7 +5,7 @@ namespace App\Repositories;
 /**
  * Class RepositoryAbstract.
  *
- * @author Sefa Karagöz <karagozsefa@gmail.com>
+ * @author 
  */
 abstract class RepositoryAbstract extends AbstractValidator
 {

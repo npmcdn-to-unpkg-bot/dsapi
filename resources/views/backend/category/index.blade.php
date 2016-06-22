@@ -30,44 +30,23 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Title</th>
+                            <th>Name</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach( $categories as $category )
                             <tr>
-                                <td> {!! link_to_route( getLang() . '.admin.category.show', $category->title,
+                                <td> {!! link_to_route( getLang() . 'admin.category.show', $category->name,
                                     $category->id, array( 'class' => 'btn btn-link btn-xs' )) !!}
+                                </td>
                                 <td>
-                                    <div class="btn-group">
-                                        <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
-                                            Action <span class="caret"></span> </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="{!! langRoute('admin.category.show', array($category->id)) !!}">
-                                                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;Show
-                                                    Category </a>
-                                            </li>
-                                            <li>
-                                                <a href="{!! langRoute('admin.category.edit', array($category->id)) !!}">
-                                                    <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Category
-                                                </a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href="{!! URL::route('admin.category.delete', array($category->id)) !!}">
-                                                    <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Delete
-                                                    Category </a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a target="_blank" href="{!! URL::route('dashboard.category', ['slug' => $category->slug]) !!}">
-                                                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;View On Site
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <a href="{!! langRoute('admin.category.edit', array($category->id)) !!}">
+                                                    <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+                                                </a> 
+                                    <a href="{!! URL::route('admin.category.delete', array($category->id)) !!}">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Delete
+                                        </a>
                                 </td>
                             </tr>
                         @endforeach

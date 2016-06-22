@@ -39,7 +39,7 @@
                         <tbody>
                         @foreach( $roles as $role )
                             <tr>
-                                <td> {!! link_to_route(getLang(). '.admin.role.show', $role->name, $role->id, array(
+                                <td> {!! link_to_route(getLang(). 'admin.role.show', $role->name, $role->id, array(
                                     'class' => 'btn btn-link btn-xs' )) !!}
                                 <td>
                                     <div class="btn-group">

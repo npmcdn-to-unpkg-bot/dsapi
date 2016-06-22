@@ -1,18 +1,18 @@
 <?php
 
-namespace Fully\Repositories\Article;
+namespace App\Repositories\Post;
 
-use Fully\Services\Cache\CacheInterface;
+use App\Services\Cache\CacheInterface;
 
 /**
  * Class CacheDecorator.
  *
  * @author Sefa Karagöz <karagozsefa@gmail.com>
  */
-class CacheDecorator extends AbstractArticleDecorator
+class CacheDecorator extends AbstractPostDecorator
 {
     /**
-     * @var \Fully\Services\Cache\CacheInterface
+     * @var \App\Services\Cache\CacheInterface
      */
     protected $cache;
 
@@ -21,15 +21,15 @@ class CacheDecorator extends AbstractArticleDecorator
      *
      * @var string
      */
-    protected $cacheKey = 'article';
+    protected $cacheKey = 'post';
 
     /**
-     * @param ArticleInterface $article
+     * @param PostInterface $post
      * @param CacheInterface   $cache
      */
-    public function __construct(ArticleInterface $article, CacheInterface $cache)
+    public function __construct(PostInterface $post, CacheInterface $cache)
     {
-        parent::__construct($article);
+        parent::__construct($post);
         $this->cache = $cache;
     }
 
@@ -40,17 +40,17 @@ class CacheDecorator extends AbstractArticleDecorator
      */
     public function find($id)
     {
-        $key = md5(getLang().$this->cacheKey.'.id.'.$id);
+        $key = md5($this->cacheKey.'.id.'.$id);
 
         if ($this->cache->has($key)) {
             return $this->cache->get($key);
         }
 
-        $article = $this->article->find($id);
+        $post = $this->post->find($id);
 
-        $this->cache->put($key, $article);
+        $this->cache->put($key, $post);
 
-        return $article;
+        return $post;
     }
 
     /**
@@ -58,17 +58,17 @@ class CacheDecorator extends AbstractArticleDecorator
      */
     public function all()
     {
-        $key = md5(getLang().$this->cacheKey.'.all.articles');
+        $key = md5($this->cacheKey.'.all.posts');
 
         if ($this->cache->has($key)) {
             return $this->cache->get($key);
         }
 
-        $articles = $this->article->all();
+        $posts = $this->post->all();
 
-        $this->cache->put($key, $articles);
+        $this->cache->put($key, $posts);
 
-        return $articles;
+        return $posts;
     }
 
     /**
@@ -80,13 +80,13 @@ class CacheDecorator extends AbstractArticleDecorator
     public function paginate($page = 1, $limit = 10, $all = false)
     {
         $allkey = ($all) ? '.all' : '';
-        $key = md5(getLang().$this->cacheKey.'.page.'.$page.'.'.$limit.$allkey);
+        $key = md5($this->cacheKey.'.page.'.$page.'.'.$limit.$allkey);
 
         if ($this->cache->has($key)) {
             return $this->cache->get($key);
         }
 
-        $paginated = $this->article->paginate($page, $limit, $all);
+        $paginated = $this->post->paginate($page, $limit, $all);
 
         $this->cache->put($key, $paginated);
 
@@ -100,17 +100,17 @@ class CacheDecorator extends AbstractArticleDecorator
      */
     public function getBySlug($slug)
     {
-        $key = md5(getLang().$this->cacheKey.'.slug.'.$slug);
+        $key = md5($this->cacheKey.'.slug.'.$slug);
 
         if ($this->cache->has($key)) {
             return $this->cache->get($key);
         }
 
-        $article = $this->article->getBySlug($slug);
+        $post = $this->post->getBySlug($slug);
 
-        $this->cache->put($key, $article);
+        $this->cache->put($key, $post);
 
-        return $article;
+        return $post;
     }
 
     /**
@@ -118,19 +118,19 @@ class CacheDecorator extends AbstractArticleDecorator
      *
      * @return mixed
      */
-    public function getLastArticle($limit)
+    public function getLastPost($limit)
     {
-        $key = md5(getLang().$limit.$this->cacheKey.'.last');
+        $key = md5($limit.$this->cacheKey.'.last');
 
         if ($this->cache->has($key)) {
             return $this->cache->get($key);
         }
 
-        $articles = $this->article->getLastArticle($limit);
+        $posts = $this->post->getLastPost($limit);
 
-        $this->cache->put($key, $articles);
+        $this->cache->put($key, $posts);
 
-        return $articles;
+        return $posts;
     }
 
     /**
@@ -138,18 +138,18 @@ class CacheDecorator extends AbstractArticleDecorator
      *
      * @return mixed
      */
-    public function getHotArticles($limit)
+    public function getHotPosts($limit)
     {
-        $key = md5(getLang().$limit.$this->cacheKey.'.hot');
+        $key = md5($limit.$this->cacheKey.'.hot');
 
         if ($this->cache->has($key)) {
             return $this->cache->get($key);
         }
 
-        $articles = $this->article->getHotArticles($limit);
+        $posts = $this->post->getHotPosts($limit);
 
-        $this->cache->put($key, $articles);
+        $this->cache->put($key, $posts);
 
-        return $articles;
+        return $posts;
     }
 }
