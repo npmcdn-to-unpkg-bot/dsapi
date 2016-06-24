@@ -7,7 +7,7 @@ use Config;
 use Response;
 use App\Models\Tag;
 use App\Models\Category;
-use Str;
+use Illuminate\Support\Str;
 use Event;
 use Image;
 use File;
@@ -18,7 +18,7 @@ use App\Exceptions\Validation\ValidationException;
 /**
  * Class PostRepository.
  *
- * @author Sefa Karagöz <karagozsefa@gmail.com>
+ * @author
  */
 class PostRepository extends RepositoryAbstract implements PostInterface, CrudableInterface
 {
@@ -90,19 +90,6 @@ class PostRepository extends RepositoryAbstract implements PostInterface, Crudab
         return $this->post->get()->lists('title', 'id');
     }
 
-    /*
-    public function paginate($perPage = null, $all = false) {
-
-        if ($all)
-            return $this->post->with('tags')->orderBy('created_at', 'DESC')
-                ->paginate(($perPage) ? $perPage : $this->perPage);
-
-        return $this->post->with('tags')->orderBy('created_at', 'DESC')
-            ->where('is_published', 1)
-            ->paginate(($perPage) ? $perPage : $this->perPage);
-    }
-    */
-
     /**
      * Get paginated posts.
      *
@@ -168,9 +155,9 @@ class PostRepository extends RepositoryAbstract implements PostInterface, Crudab
         if ($this->isValid($attributes)) {
 
             $this->post->user_id = auth()->getUser()->id;
-            if ($this->post->fill($attributes)->save()) {
-                $category = Category::find($attributes['category']);
-                $category->posts()->save($this->post);
+            $this->post->category_id = $attributes['category_id'];
+            if (!$this->post->fill($attributes)->save()) {
+                return false;
             }
 
             $postTags = explode(',', $attributes['tag']);
@@ -179,6 +166,7 @@ class PostRepository extends RepositoryAbstract implements PostInterface, Crudab
                 if (!$postTag) {
                     continue;
                 }
+                $postTag = trim($postTag);
 
                 $tag = Tag::where('name', '=', $postTag)->first();
 
@@ -188,7 +176,7 @@ class PostRepository extends RepositoryAbstract implements PostInterface, Crudab
 
                 // $tag->lang = $this->getLang();
                 $tag->name = $postTag;
-                //$tag->slug = Str::slug($postTag);
+                $tag->slug = Str::slug($postTag);
 
                 $this->post->tags()->save($tag);
             }

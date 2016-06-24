@@ -13,8 +13,8 @@ class CreatePostTagsTable extends Migration
     public function up()
     {
         Schema::create('post__tags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->increments('id')->index();
+            // $table->timestamps();
         });
     }
 

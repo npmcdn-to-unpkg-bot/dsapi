@@ -80,3 +80,37 @@ function langRedirectRoute($route)
 {
     return Redirect::route($route);
 }
+
+/**
+ * Get words from string...
+ * @param string $str: String of words
+ * @param integer $max: Maximum words
+ * @param char $char: is Delimiter
+ * @param string $end: Apend string if string will be cutted
+ */
+function subwords( $str, $max = 24, $char = ' ', $end = '...' ) {
+    $str = trim( $str ) ;
+    $str = $str . $char ;
+    $len = strlen( $str ) ;
+    $words = '' ;
+    $w = '' ;
+    $c = 0 ;
+    for ( $i = 0; $i < $len; $i++ ) {
+        if ( $str[$i] != $char ) {
+            $w = $w . $str[$i] ;
+        } else {
+            if ( ( $w != $char ) and ( $w != '' ) ) {
+                $words .= $w . $char ;
+                $c++ ;
+                if ( $c >= $max ) {
+                    break ;
+                }
+                $w = '' ;
+            }
+        }
+    }
+    if ( $i+1 >= $len) {
+        $end = '' ;
+    }
+    return trim( $words ) . $end ;
+}

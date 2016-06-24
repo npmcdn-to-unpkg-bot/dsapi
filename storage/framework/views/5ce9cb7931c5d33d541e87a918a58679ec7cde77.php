@@ -21,7 +21,7 @@
 <section class="content-header">
     <h1> Post <small> | Add Post</small> </h1>
     <ol class="breadcrumb">
-        <li><a href="<?php echo url(getLang() . '/admin/post'); ?>"><i class="fa fa-book"></i> Post</a></li>
+        <li><a href="<?php echo url('/admin/post'); ?>"><i class="fa fa-book"></i> Post</a></li>
         <li class="active">Add Post</li>
     </ol>
 </section>
@@ -33,14 +33,14 @@
 
 
     <!-- Category -->
-    <div class="control-group <?php echo $errors->has('category') ? 'error' : ''; ?>">
+    <div class="control-group <?php echo $errors->has('category_id') ? 'error' : ''; ?>">
         <label class="control-label" for="title">Category</label>
 
         <div class="controls">
-            <?php echo Form::select('category', $categories, null, array('class' => 'form-control', 'value'=>Input::old('category'))); ?>
+            <?php echo Form::select('category_id', $categories, null, array('class' => 'form-control', 'value'=>Input::old('category_id'))); ?>
 
-            <?php if($errors->first('category')): ?>
-            <span class="help-block"><?php echo $errors->first('category'); ?></span>
+            <?php if($errors->first('category_id')): ?>
+            <span class="help-block"><?php echo $errors->first('category_id'); ?></span>
             <?php endif; ?>
         </div>
     </div>

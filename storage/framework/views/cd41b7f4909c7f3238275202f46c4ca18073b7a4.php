@@ -69,7 +69,7 @@
                             <tr>
                                 <td>
                                     <a href="#" class="btn btn-link btn-xs">
-                                        <?php echo $post->title; ?> </a>
+                                        <?php echo subwords(strip_tags($post->content), 10); ?></a>
                                 </td>
                                 <td><?php echo $post->created_at; ?></td>
                                 <td><?php echo $post->updated_at; ?></td>

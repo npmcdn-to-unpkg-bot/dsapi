@@ -28,32 +28,8 @@
 <br>
 <div class="container">
 
-    {!! Form::open( array( 'route' => array(getLang(). 'admin.post.update', $post->id), 'method' => 'PATCH', 'files'=>true)) !!}
-    <!-- Title -->
-    <div class="control-group {!! $errors->has('title') ? 'has-error' : '' !!}">
-        <label class="control-label" for="title">Title</label>
+    {!! Form::open( array( 'route' => array('admin.post.update', $post->id), 'method' => 'PATCH', 'files'=>true)) !!}
 
-        <div class="controls">
-            {!! Form::text('title', $post->title, array('class'=>'form-control', 'id' => 'title', 'placeholder'=>'Title', 'value'=>Input::old('title'))) !!}
-            @if ($errors->first('title'))
-            <span class="help-block">{!! $errors->first('title') !!}</span>
-            @endif
-        </div>
-    </div>
-    <br>
-
-    <!-- Tag -->
-    <div class="control-group {!! $errors->has('tag') ? 'has-error' : '' !!}">
-        <label class="control-label" for="title">Tag</label>
-
-        <div class="controls">
-            {!! Form::text('tag', $tags, array('class'=>'form-control', 'id' => 'tag', 'placeholder'=>'Tag', 'value'=>Input::old('tag'))) !!}
-            @if ($errors->first('tag'))
-            <span class="help-block">{!! $errors->first('tag') !!}</span>
-            @endif
-        </div>
-    </div>
-    <br>
 
     <!-- Category -->
     <div class="control-group {!! $errors->has('category') ? 'error' : '' !!}">
@@ -81,60 +57,18 @@
     </div>
     <br>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th-list">
-                </span>META DATA</a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Meta Description -->
-                        <div class="control-group {!! $errors->has('meta_description') ? 'has-error' : '' !!}">
-                            <label class="control-label" for="title">Meta Description</label>
+    <!-- Tag -->
+    <div class="control-group {!! $errors->has('tag') ? 'has-error' : '' !!}">
+        <label class="control-label" for="title">Tag</label>
 
-                            <div class="controls">
-                                {!! Form::text('meta_description', $post->meta_description, array('class'=>'form-control', 'id' => 'meta_description', 'placeholder'=>'Meta Description', 'value'=>Input::old('meta_description'))) !!}
-                                @if ($errors->first('meta_description'))
-                                <span class="help-block">{!! $errors->first('meta_description') !!}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <br>
-
-                        <!-- Meta Keywords -->
-                        <div class="control-group {!! $errors->has('meta_keywords') ? 'has-error' : '' !!}">
-                            <label class="control-label" for="title">Meta Keywords</label>
-
-                            <div class="controls">
-                                {!! Form::textarea('meta_keywords', $post->meta_keywords, array('class'=>'form-control', 'id' => 'meta_keywords', 'placeholder'=>'Meta Keywords', 'value'=>Input::old('meta_keywords'))) !!}
-                                @if ($errors->first('meta_keywords'))
-                                <span class="help-block">{!! $errors->first('meta_keywords') !!}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-            </div>
+        <div class="controls">
+            {!! Form::text('tag', $tags, array('class'=>'form-control', 'id' => 'tag', 'placeholder'=>'Tag', 'value'=>Input::old('tag'))) !!}
+            @if ($errors->first('tag'))
+            <span class="help-block">{!! $errors->first('tag') !!}</span>
+            @endif
         </div>
     </div>
-
-    <!-- Image -->
-    <div class="fileinput fileinput-new control-group {!! $errors->has('image') ? 'has-error' : '' !!}" data-provides="fileinput">
-        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-            <img data-src="" {!! (($post->path) ? "src='".url($post->path . $post->file_name)."'" : null) !!} alt="...">
-        </div>
-        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-        <div>
-            <div> <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-        {!! Form::file('image', null, array('class'=>'form-control', 'id' => 'image', 'placeholder'=>'Image', 'value'=>Input::old('image'))) !!}
-      @if ($errors->first('image')) <span class="help-block">{!! $errors->first('image') !!}</span> @endif </span> <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
-        </div>
-        <br>
+    <br>
 
     <!-- Published -->
     <div class="control-group {!! $errors->has('is_published') ? 'has-error' : '' !!}">

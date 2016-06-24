@@ -8,8 +8,7 @@ CKEDITOR.editorConfig = function (config) {
     //config.width = 850;
     config.width = '100%';
 
-
-    config.height = 500;
+    config.height = '100px';
 
     //config.skin = 'moono-dark';
     config.skin = 'office2013';

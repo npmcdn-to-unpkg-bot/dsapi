@@ -70,7 +70,7 @@
                             <tr>
                                 <td>
                                     <a href="#" class="btn btn-link btn-xs">
-                                        {!! $post->title !!} </a>
+                                        {!! subwords(strip_tags($post->content), 10) !!}</a>
                                 </td>
                                 <td>{!! $post->created_at !!}</td>
                                 <td>{!! $post->updated_at !!}</td>

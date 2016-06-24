@@ -16,7 +16,7 @@
 <section class="content-header">
     <h1> Post <small> | Add Post</small> </h1>
     <ol class="breadcrumb">
-        <li><a href="{!! url(getLang() . '/admin/post') !!}"><i class="fa fa-book"></i> Post</a></li>
+        <li><a href="{!! url('/admin/post') !!}"><i class="fa fa-book"></i> Post</a></li>
         <li class="active">Add Post</li>
     </ol>
 </section>
@@ -27,13 +27,13 @@
     {!! Form::open(array('action' => '\App\Http\Controllers\Admin\PostController@store', 'files'=>true)) !!}
 
     <!-- Category -->
-    <div class="control-group {!! $errors->has('category') ? 'error' : '' !!}">
+    <div class="control-group {!! $errors->has('category_id') ? 'error' : '' !!}">
         <label class="control-label" for="title">Category</label>
 
         <div class="controls">
-            {!! Form::select('category', $categories, null, array('class' => 'form-control', 'value'=>Input::old('category'))) !!}
-            @if ($errors->first('category'))
-            <span class="help-block">{!! $errors->first('category') !!}</span>
+            {!! Form::select('category_id', $categories, null, array('class' => 'form-control', 'value'=>Input::old('category_id'))) !!}
+            @if ($errors->first('category_id'))
+            <span class="help-block">{!! $errors->first('category_id') !!}</span>
             @endif
         </div>
     </div>

@@ -136,6 +136,8 @@ Route::group(array('prefix' => '/admin',
     Route::resource('post', 'PostController', array('before' => 'hasAccess:post'));
     Route::get('post/{id}/delete', array('as' => 'admin.post.delete',
                                                  'uses' => 'PostController@confirmDestroy', ))->where('id', '[0-9]+');
+    Route::post('post/{id}/toggle-publish', array('as' => 'admin.post.toggle-publish',
+                                                         'uses' => 'PostController@togglePublish', ))->where('id', '[0-9]+');
 
     // user
     Route::resource('user', 'UserController');
