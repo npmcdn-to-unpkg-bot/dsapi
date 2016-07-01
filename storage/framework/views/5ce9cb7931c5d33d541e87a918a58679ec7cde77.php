@@ -5,8 +5,7 @@
 
 <?php echo HTML::script('jasny-bootstrap/js/jasny-bootstrap.min.js'); ?>
 
-<?php echo HTML::script('ckeditor/ckeditor.js'); ?>
-
+<!-- <?php echo HTML::script('ckeditor/ckeditor.js'); ?> -->
 <?php echo HTML::script('assets/bootstrap/js/bootstrap-tagsinput.js'); ?>
 
 <?php echo HTML::script('assets/js/jquery.slug.js'); ?>
@@ -31,6 +30,20 @@
 
     <?php echo Form::open(array('action' => '\App\Http\Controllers\Admin\PostController@store', 'files'=>true)); ?>
 
+
+    <!-- Type -->
+    <div class="control-group <?php echo $errors->has('type') ? 'error' : ''; ?>">
+        <label class="control-label" for="title">Type</label>
+
+        <div class="controls">
+            <?php echo Form::select('type', array('text'=>'Text', 'image'=>'Image', 'video'=>'Video'), null, array('class' => 'form-control', 'value'=>Input::old('type'))); ?>
+
+            <?php if($errors->first('type')): ?>
+            <span class="help-block"><?php echo $errors->first('type'); ?></span>
+            <?php endif; ?>
+        </div>
+    </div>
+    <br>
 
     <!-- Category -->
     <div class="control-group <?php echo $errors->has('category_id') ? 'error' : ''; ?>">
@@ -60,6 +73,20 @@
     </div>
     <br>
 
+    <!-- Attachment -->
+    <div class="control-group <?php echo $errors->has('src') ? 'has-error' : ''; ?>">
+        <label class="control-label" for="title">Attachment Url</label>
+
+        <div class="controls">
+            <?php echo Form::text('src', null, array('class'=>'form-control', 'id' => 'src', 'placeholder'=>'Http://', 'value'=>Input::old('src'))); ?>
+
+            <?php if($errors->first('src')): ?>
+            <span class="help-block"><?php echo $errors->first('src'); ?></span>
+            <?php endif; ?>
+        </div>
+    </div>
+    <br>
+
     <!-- Tag -->
     <div class="control-group <?php echo $errors->has('tag') ? 'has-error' : ''; ?>">
         <label class="control-label" for="title">Tag</label>
@@ -69,6 +96,20 @@
 
             <?php if($errors->first('tag')): ?>
             <span class="help-block"><?php echo $errors->first('tag'); ?></span>
+            <?php endif; ?>
+        </div>
+    </div>
+    <br>
+
+    <!-- Source -->
+    <div class="control-group <?php echo $errors->has('source') ? 'has-error' : ''; ?>">
+        <label class="control-label" for="title">Source</label>
+
+        <div class="controls">
+            <?php echo Form::text('source', null, array('class'=>'form-control', 'id' => 'source', 'placeholder'=>'Sưu tầm', 'value'=>Input::old('source'))); ?>
+
+            <?php if($errors->first('source')): ?>
+            <span class="help-block"><?php echo $errors->first('source'); ?></span>
             <?php endif; ?>
         </div>
     </div>
@@ -91,14 +132,14 @@
     <?php echo Form::close(); ?>
 
     <script type="text/javascript">
-        window.onload = function () {
+        /*window.onload = function () {
             CKEDITOR.replace('content', {
-                "filebrowserBrowseUrl": "<?php echo url('filemanager/show'); ?>"
+                "filebrowserBrowseUrl": "<?php echo url('filemanager/show'); ?>",
+                "height":100
             });
-        };
+        };*/
 
         $(document).ready(function () {
-
             if ($('#tag').length != 0) {
                 var elt = $('#tag');
                 elt.tagsinput();

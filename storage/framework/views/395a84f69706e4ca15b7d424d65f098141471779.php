@@ -57,7 +57,7 @@
                 </ul>
             </li>
             <li class="<?php echo e(setActive('admin/logout*')); ?>">
-                <a href="<?php echo e(url('/admin/logout')); ?>"> <i class="fa fa-sign-out"></i> <span>Logout</span> </a>
+                <a href="<?php echo e(url('/logout')); ?>"> <i class="fa fa-sign-out"></i> <span>Logout</span> </a>
             </li>
         </ul>
     </section>

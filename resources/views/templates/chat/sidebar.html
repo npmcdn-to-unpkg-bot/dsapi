@@ -27,7 +27,7 @@
                                 </a>
                             </li>
                             <li ng-repeat='user in listUsersForChat' ng-if="user.is_following">
-                                <a ng-click="openBoxChat(user.infoUser.userId, 1, user.display_name, user.id)" href="javascript:;">
+                                <a ng-click="openBoxChat(user.infoUser.userId, 1, user.name, user.id)" href="javascript:;">
                                     <div class="item-member">
                                         <div class="item-avatar">
                                             <img ng-src="{{ ::user.avatar}}">
@@ -37,7 +37,7 @@
                                             <span ng-if="user.infoUser.status == 1" class="status online"></span>
                                         </div>
                                         <div class="item-name">
-                                            {{ ::user.display_name}}
+                                            {{ ::user.name}}
                                         </div>
                                     </div>
                                 </a>
@@ -53,7 +53,7 @@
                     <div class="list-member">
                         <ul>
                             <li ng-repeat='user in listUsersForChat' ng-if="!user.is_following">
-                                <a ng-click="openBoxChat(user.infoUser.userId, 1, user.display_name, user.id)" href="javascript:;">
+                                <a ng-click="openBoxChat(user.infoUser.userId, 1, user.name, user.id)" href="javascript:;">
                                     <div class="item-member">
                                         <div class="item-avatar">
                                             <img ng-src="{{ ::user.avatar}}">
@@ -63,7 +63,7 @@
                                             <span ng-if="user.infoUser.status == 1" class="status online"></span>
                                         </div>
                                         <div class="item-name">
-                                            {{ ::user.display_name}}
+                                            {{ ::user.name}}
                                         </div>
                                     </div>
                                 </a>

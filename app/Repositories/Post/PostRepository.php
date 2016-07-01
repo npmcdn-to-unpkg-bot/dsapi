@@ -7,6 +7,7 @@ use Config;
 use Response;
 use App\Models\Tag;
 use App\Models\Category;
+use App\Models\Attachment;
 use Illuminate\Support\Str;
 use Event;
 use Image;
@@ -156,7 +157,18 @@ class PostRepository extends RepositoryAbstract implements PostInterface, Crudab
 
             $this->post->user_id = auth()->getUser()->id;
             $this->post->category_id = $attributes['category_id'];
+            $this->post->type = $attributes['type'];
+            $this->post->source = $attributes['source'];
             if (!$this->post->fill($attributes)->save()) {
+                return false;
+            }
+
+            try {
+                $attachment = new Attachment();
+                $attachment->type = $attributes['type'];
+                $attachment->src = $attributes['src'];
+                $this->post->attachments()->save($attachment);
+            } catch (Exception $e) {
                 return false;
             }
 
@@ -178,7 +190,11 @@ class PostRepository extends RepositoryAbstract implements PostInterface, Crudab
                 $tag->name = $postTag;
                 $tag->slug = Str::slug($postTag);
 
-                $this->post->tags()->save($tag);
+                try {
+                    $this->post->tags()->save($tag);                    
+                } catch (Exception $e) {
+                    return false;
+                }
             }
 
             //Event::fire('post.created', $this->post);

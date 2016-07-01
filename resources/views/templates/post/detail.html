@@ -23,7 +23,7 @@
                                         <img ng-if="!post.avatar" ng-src="/app/images/avatar.png">
                                     </div>
                                     <div class="intro-user">
-                                        <div class="name-user">{{post.display_name}}</div>
+                                        <div class="name-user">{{post.name}}</div>
                                         <div class="stats-user">
                                             <span>1000</span> bạn
                                             <span class="dot"> · </span>
@@ -61,8 +61,8 @@
                                     <div class="item-user">
                                         <a href="javascript:;" ui-sref="user.activity({userId: post.user_id})">
                                             <img class="media-object" ng-if="post.avatar" ng-src="{{post.avatar}}">
-                                            <img class="media-object" ng-if="!post.avatar" ng-src="/app/images/avatar.png" alt="{{post.display_name}}">
-                                            <span>{{post.display_name}}</span>
+                                            <img class="media-object" ng-if="!post.avatar" ng-src="/app/images/avatar.png" alt="{{post.name}}">
+                                            <span>{{post.name}}</span>
                                         </a>
                                     </div>
                                 </div>

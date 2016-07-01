@@ -78,7 +78,7 @@ Route::group(array('prefix'=>'/api/'), function() {
 
     /*Channel*/
     Route::get('/channel/getmatch/{source?}', 'ChannelController@getmatch');
-    Route::get('/channel/getmatchlink/url/{source?}', 'ChannelController@getmatchlink');
+    Route::get('/channel/getmatchlink/', 'ChannelController@getmatchlink');
 });
 
 /*
@@ -153,7 +153,7 @@ Route::group(array('prefix' => '/admin',
 
 /*Test*/
 Route::get('/test', function () {
-    $url = urlencode('http://www.8bongda.com/link-sopcast/link-sopcast-euro-2016-phap-vs-albania-2h00-ngay-166.html');
+    $url = urlencode('http://www.8bongda.com/link-sopcast/link-sopcast-euro-2016-duc-vs-italia-2h00-ngay-37.html');
     echo '<form action="/api/channel/getmatchlink/url/' . $url . '">';
     // echo '<input name="source" value=""/>';
     // echo '<input type="hidden" name="_token" value="' . csrf_token() . '">';

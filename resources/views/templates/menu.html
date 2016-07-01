@@ -92,7 +92,7 @@
                                     <a class="member " href="javascript:;" ui-sref="post({post_id: activity.id})">
                                         <span class="media-object"><img ng-src="{{activity.top_users[0].avatar}}" alt=""/></span>
                                         <h6 class="media-heading">
-                                            <strong>{{activity.top_users[0].display_name}}</strong>
+                                            <strong>{{activity.top_users[0].name}}</strong>
                                             <span ng-if="activity.type == 'liked'"><span ng-if="activity.count > 1">và {{activity.count - 1}} người khác</span> thích bài viết của bạn</span>
                                             <span ng-if="activity.type == 'commented'"><span ng-if="activity.count > 1">và {{activity.count - 1}} người khác</span> thích bài viết của bạn </span>
                                         </h6>
@@ -111,12 +111,12 @@
         </div>
         <div ng-if="loggedIn" class="btn-group form-profile">
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default dropdown-toggle">
-                <img ng-if="me.avatar" ng-src="{{me.avatar}}"><img ng-if="!me.avatar" ng-src="/app/images/avatar.png"><span>{{me.display_name}}</span><span class="caret"></span></button>
+                <img ng-if="me.avatar" ng-src="{{me.avatar}}"><img ng-if="!me.avatar" ng-src="/app/images/avatar.png"><span>{{me.name}}</span><span class="caret"></span></button>
             <div class="dropdown-menu dropdown-profile">
                 <div class="arrow"></div>
                 <div class="dropdown-body">
                     <ul class="with-border">
-                        <li class="anchor"><a ui-sref="user.activity({userId: me.id })" href="javascript:;"><span class="item-avatar"><img ng-if="!me.avatar" ng-src="/app/images/avatar.png"><img ng-if="me.avatar" ng-src="{{me.avatar}}"></span><span class="item-info"><span class="item-info-name">{{me.display_name}}</span><!-- <span class="item-info-bcoin">{{me.bcoin | shortNumber}}<img src="/images/xbeat-coin.png.pagespeed.ic.6BVlIQPhoC.png"></span> --></span></a></li>
+                        <li class="anchor"><a ui-sref="user.activity({userId: me.id })" href="javascript:;"><span class="item-avatar"><img ng-if="!me.avatar" ng-src="/app/images/avatar.png"><img ng-if="me.avatar" ng-src="{{me.avatar}}"></span><span class="item-info"><span class="item-info-name">{{me.name}}</span><!-- <span class="item-info-bcoin">{{me.bcoin | shortNumber}}<img src="/images/xbeat-coin.png.pagespeed.ic.6BVlIQPhoC.png"></span> --></span></a></li>
                         <li><a ui-sref="chat" href="javascript:;">Quản lý tin nhắn</a></li>
                         <li><a ui-sref="user.activity({userId: me.id })" href="javascript:;">Xem hồ sơ</a></li>
                         <li><a ui-sref="profiles" href="javascript:;">Sửa hồ sơ</a></li>

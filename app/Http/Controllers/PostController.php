@@ -214,7 +214,7 @@ class PostController extends Controller
     * $by       String (ASC|DESC)
     * return array object
     */
-    public function getPostsByCategoryId ($categoryId, $offset = 0, $limit = 0, $order='id', $by='ASC') {
+    public function getPostsByCategoryId ($categoryId, $offset = 0, $limit = 0, $order='id', $by='DESC') {
         $query = Post::where('category_id', $categoryId)->orderBy($order, $by);
         if ($limit < $offset) {
             return response()->json(array('error'=>1001, 'data'=>'', 'message'=>'Param invalid'));

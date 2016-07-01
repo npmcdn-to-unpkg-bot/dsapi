@@ -104,7 +104,7 @@
                                     <a href="{{ url('/admin/user/' . Auth::user()->id) }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('/admin/logout') }}" class="btn btn-default btn-flat">Sign out</a></div>
+                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a></div>
 
                             </li>
                         </ul>

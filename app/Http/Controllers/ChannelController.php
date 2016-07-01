@@ -41,14 +41,16 @@ class ChannelController extends Controller
     	$postArea = $html->find('div[id=post-area] ul[class=recent]', 0)->innertext;
     	$ul = $this->str_get_html($postArea);
 
-    	$result = [];
+    	$result = []; 
     	foreach ($ul->find('li') as $element) {
+    		$m = array();
     		$li = $this->str_get_html($element->innertext);
     		$match = $li->find('div[class=story-text] h2 a', 0);//->innertext;
     		// $matchInfo = $this->str_get_html($match);
-    		$result[]['href'] = $match->href;
-    		$result[]['text'] = $match->innertext;
+    		$m['href'] = $match->href;
+    		$m['text'] = $match->innertext;
     		// $result[]['href'] = $matchInfo->find('href');
+    		$result[] = $m;
     	}
     	return response()->json(array('error'=>0, 'data'=>$result, 'message'=>''));
     }
@@ -58,8 +60,8 @@ class ChannelController extends Controller
      * @param  string $source [description]
      * @return [type]         [description]
      */
-    public function getmatchlink($source = '') {
-    	$source = urldecode($source);
+    public function getmatchlink(Request $request) {
+    	$source = urldecode($request->get('source', ''));
     	if ($source == '') {
     		return response()->json(array('error'=>0, 'data'=>'', 'message'=>'not source'));
     	}
@@ -69,12 +71,13 @@ class ChannelController extends Controller
 
     	$result = [];
     	foreach ($field->find('a') as $element) {
-    		// echo $element . '<br>';
+    		$m = array();
     		$channel = explode(':', $element->innertext )[0];
     		if ( $channel == 'sop' || $channel == 'acestream') {
-    			$result[]['href'] = $element->href;
-    			$result[]['text'] = $element->innertext;
-    			$result[]['channel'] = $channel;
+    			$m['href'] = $element->href;
+    			$m['text'] = $element->innertext;
+    			$m['channel'] = $channel;
+    			$result[] = $m;
     		}
     		
     	}

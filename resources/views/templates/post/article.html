@@ -161,7 +161,7 @@
                             </div>
                             <div class="tx-cm">
                                 <div class="hd-cm">
-                                    <a ui-sref="user.activity({userId: cm.user_id })">{{cm.display_name}}</a>
+                                    <a ui-sref="user.activity({userId: cm.user_id })">{{cm.name}}</a>
                                     <span ng-bind-html="cm.content | filterTxt"></span>
 
                                     <a ng-if="cm.post_type == 'images'" ng-repeat="attachment in cm.attachments" href="javascript:;" ng-href="{{attachment.src}}" data-toggle="lightbox" data-gallery="multiimages-{{cm.comment_id}}">
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="tx-cm">
                                     <div class="hd-cm">
-                                        <a ui-sref="user.activity({userId: rcm.user_id })">{{rcm.display_name}}</a> <span ng-bind-html="rcm.content | filterTxt"></span>
+                                        <a ui-sref="user.activity({userId: rcm.user_id })">{{rcm.name}}</a> <span ng-bind-html="rcm.content | filterTxt"></span>
                                     </div>
                                     <div class="bt-cm">
                                         <a href="javascript:;">Thích</a>
